@@ -1,0 +1,53 @@
+Table Jogador {
+  inscricao varchar [pk] 
+  nome varchar(100)
+  equipe int [ref: > Equipe.id]
+  posicao varchar [not null]
+}
+
+Table Equipe {
+  id int [pk, increment]
+  nome  varchar(100)
+  cidadeSede varchar(100)
+  dataCriacao date [not null]
+}
+
+Table Partida {
+  id int [pk, increment]
+  horarioMarcado datetime [not null]
+  estadio int [ref: > Estadio.id]
+  timeVisitante int [ref: > Equipe.id]
+  timeMandante int [ref: > Equipe.id]
+  campeonato int [ref: > Campeonato.id]
+  golsTimeVisitante int
+  golsTimeMandante int
+  arbitro varchar(100) [ref: > Arbitro.matricula]
+}
+
+Table Arbitro {
+  matricula varchar(100) [pk]
+  nome varchar(100)
+  cidade int [ref: > Cidade.id]
+}
+
+Table Estadio {
+  id int [pk, increment]
+  nome varchar(100) [not null]
+  capacidade int 
+  cidade int [ref: > Cidade.id]
+}
+
+Table Cidade {
+  id int [pk, increment]
+  nome varchar(100) [not null]
+  estado varchar(100)
+}
+
+Table Campeonato {
+  id int [pk, increment]
+  nome varchar(100)
+  inicio date
+  fim date
+}
+
+
